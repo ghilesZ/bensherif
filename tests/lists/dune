@@ -1,0 +1,8 @@
+(executable
+ (name test)
+ (libraries bensherif)
+ (modules   test))
+
+(alias
+ (name    default)
+ (action  (run %{test})))

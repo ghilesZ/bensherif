@@ -1,22 +1,23 @@
-# targets
-TARGETS = cyclicProd cyclicSum list opt
+# Frontend to dune.
+
+.PHONY: default build install uninstall test clean
+
+default: build
 
 build:
-	ocamlc -o cyclicProd cyclic.ml
-	ocamlc -o cyclicSum cy.ml
-	ocamlc -o list lst.ml
-	ocamlc -o opt option.ml
+	dune build src/bensherif.cma
 
-run: build
-	./bch.sh
+test:
+	dune runtest -f
+
+install:
+	dune install
+
+uninstall:
+	dune uninstall
 
 clean:
-	rm -f .depend $(TARGETS)
-	rm -f `find . -name "*.o"`
-	rm -f `find . -name "*.a"`
-	rm -f `find . -name "*.cm*"`
-	rm -f `find . -name "*~"`
-# .png files and .dat files are generated from the benchmarks
-	rm -f `find . -name "*.png"`
-	rm -f `find . -name "*.dat"`
-	rm -f $(TARGETS)
+	dune clean
+# Optionally, remove all files/folders ignored by git as defined
+# in .gitignore (-X).
+	git clean -dfX
